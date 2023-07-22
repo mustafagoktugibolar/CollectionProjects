@@ -1,3 +1,6 @@
+import FixtureGenerator.Fixture;
+import FixtureGenerator.Team;
+
 import java.util.ArrayList;
 // import java.util.Comparator;
 // import java.util.Date;
@@ -51,16 +54,21 @@ public class Main {
         // }
 
         ArrayList<Team> teams = new ArrayList<>();
-        teams.add(new Team(1,"Fenerbahce"));
-        teams.add(new Team(2,"Galatasaray"));
-        teams.add(new Team(3,"Basaksehir"));
-        teams.add(new Team(4,"Besiktas"));
-        teams.add(new Team(5,"Trabzon"));
 
-        Matchgenerator m = new Matchgenerator(teams);
+        teams.add(new Team(1,"Fenerbahçe"));
+        teams.add(new Team(2,"Galatasaray"));
+        teams.add(new Team(3,"Başakşehir"));
+        teams.add(new Team(4,"Beşiktaş"));
+        teams.add(new Team(5,"Trabzon"));
+        teams.add(new Team(6,"Bursa"));
+        teams.add(new Team(7,"Bolu"));
+        //teams.add(new FixtureGenerator.Team(8, "Gaziosmanpasa"));
+
+        Fixture fixture = new Fixture(teams);
+
+
         
-        m.generator();
-        m.printMatches();
+
         
         
       
