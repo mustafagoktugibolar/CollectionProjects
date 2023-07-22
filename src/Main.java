@@ -1,5 +1,6 @@
 import FixtureGenerator.Fixture;
 import FixtureGenerator.Team;
+import patikaStore.PatikaStore;
 
 import java.util.ArrayList;
 // import java.util.Comparator;
@@ -53,18 +54,19 @@ public class Main {
         //     System.out.println(book.getName() + " page num : " + book.getPages());
         // }
 
-        ArrayList<Team> teams = new ArrayList<>();
-
-        teams.add(new Team(1,"Fenerbahçe"));
-        teams.add(new Team(2,"Galatasaray"));
-        teams.add(new Team(3,"Başakşehir"));
-        teams.add(new Team(4,"Beşiktaş"));
-        teams.add(new Team(5,"Trabzon"));
-        teams.add(new Team(6,"Bursa"));
-        teams.add(new Team(7,"Bolu"));
-        //teams.add(new FixtureGenerator.Team(8, "Gaziosmanpasa"));
-
-        Fixture fixture = new Fixture(teams);
+//        ArrayList<Team> teams = new ArrayList<>();
+//
+//        teams.add(new Team(1,"Fenerbahçe"));
+//        teams.add(new Team(2,"Galatasaray"));
+//        teams.add(new Team(3,"Başakşehir"));
+//        teams.add(new Team(4,"Beşiktaş"));
+//        teams.add(new Team(5,"Trabzon"));
+//        teams.add(new Team(6,"Bursa"));
+//        teams.add(new Team(7,"Bolu"));
+//        //teams.add(new FixtureGenerator.Team(8, "Gaziosmanpasa"));
+//
+//        Fixture fixture = new Fixture(teams);
+        PatikaStore store = new PatikaStore();
 
 
         
