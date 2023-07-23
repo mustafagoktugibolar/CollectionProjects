@@ -1,24 +1,29 @@
 package patikaStore;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 
 public class Brand {
-    private static ArrayList<Brand> brandList;
+    private ArrayList<Brand> brandList;
     private String name;
     private int id;
     private static int index = 1;
+
+
 
     public Brand(String name) {
         this.name = name;
         this.id = index;
         index++;
+
+    }
+    public Brand(){
+        brandList = new ArrayList<>();
+        createDefaultBrands();
     }
 
-    public static ArrayList<Brand> brands(){
-        brandList = new ArrayList<>();
+    private void createDefaultBrands(){
         brandList.add(new Brand("Samsung"));
         brandList.add(new Brand("Lenovo"));
         brandList.add(new Brand("Apple"));
@@ -29,29 +34,34 @@ public class Brand {
         brandList.add(new Brand("Xiaomi"));
         brandList.add(new Brand("Monster"));
         compareList();
-        return  brandList;
     }
-    public static void compareList(){
-        Comparator<Brand> nameComparator = Comparator.comparing(Brand::getName);
-        Collections.sort(brandList, nameComparator);
+
+
+    public  ArrayList<Brand> getBrandList() {
+        return brandList;
     }
-    public static void addBrand(String name){
-        if(brandList.contains(name)) {
-            brandList.add(new Brand(name));
+
+    public void addBrand(){
+        PatikaStore.sc.nextLine();
+        System.out.print("New Brand : ");
+        String newName = PatikaStore.sc.nextLine();
+        if(!doesContains(newName)){
+            brandList.add(new Brand(newName));
+            System.out.println(newName + " Named Brand Added!");
+            compareList();
         }
         else{
-            System.out.println("Brand already exists!");
+            System.out.println("Brand Already Exists");
         }
-        compareList();
-    }
-    public static void removeBrand(int id){
-        brandList.remove(id);
-        compareList();
-    }
-    public static void removeBrand(String name){
 
     }
-
+    public void removeBrand(){
+        System.out.println("deleted!");
+        compareList();
+    }
+    public void editBrand(){
+        System.out.println("edited!");
+    }
     public String getName() {
         return name;
     }
@@ -62,6 +72,22 @@ public class Brand {
 
     public int getId() {
         return id;
+    }
+
+    private boolean doesContains(String input){
+        for (Brand brand: brandList) {
+            if(brand.getName().equals(input)){
+                return true;
+            }
+        }
+        return  false;
+    }
+
+    public void compareList(){
+        //Comparator<Brand> nameComparator = Comparator.comparing(Brand::getName);
+        Comparator<Brand> nameComparator = (brand1, brand2) ->
+                brand1.getName().compareToIgnoreCase(brand2.getName());
+        brandList.sort(nameComparator);
     }
 
 }
