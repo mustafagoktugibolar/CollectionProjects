@@ -6,24 +6,30 @@ import java.util.Scanner;
 
 public class PatikaStore implements IStore{
     private final Scanner sc = new Scanner(System.in);
-    private ArrayList<Brand> notebooks;
-    private ArrayList<Brand> phones;
+    private ArrayList<Product> notebooks;
+    private ArrayList<Product> phones;
     private final String fuctionList = """
-            -------------------------------------------------
+            -----------------------------------------------------------------
             Patika Store Product Management Panel\s
             1 - List Products
             2 - List Brands
             3 - Admin
             0 - exit
-            -------------------------------------------------""";
+            -----------------------------------------------------------------""";
 
     public PatikaStore() {
+        notebooks = new ArrayList<>();
+        phones = new ArrayList<>();
         panel();
     }
 
     @Override
     public void displayBrands() {
-        System.out.println("Brands func works");
+        System.out.println("Our Brands\n" +
+                "-----------------------------------------------------------------");
+        for (Brand brand : Brand.brands()) {
+            System.out.println( brand.getId() + " - " + brand.getName());
+        }
 
     }
 
@@ -42,13 +48,11 @@ public class PatikaStore implements IStore{
                 switch (sc.nextInt()) {
                     case 0 -> {
                         System.out.println("Leaving...");
-                        try {
+
                             Thread.sleep(3000);
                             sc.close();
                             System.exit(0);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
+
                     }
                     case 1 -> System.out.println("case 1");
                     case 2 -> displayBrands();
@@ -58,6 +62,8 @@ public class PatikaStore implements IStore{
             }catch (InputMismatchException e){
                 System.out.println("Input Mismatch!!!");
                 sc.nextLine();
+            }catch (InterruptedException e){
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -66,6 +72,7 @@ public class PatikaStore implements IStore{
     @Override
     public void admin() {
         System.out.println("admin func works");
+        Brand.addBrand("ibolar");
     }
 
 }
