@@ -2,6 +2,7 @@ package patikaStore;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.InputMismatchException;
 
 
 public class Brand {
@@ -23,6 +24,7 @@ public class Brand {
         createDefaultBrands();
     }
 
+    //CREATE DEFAULT BRANDS
     private void createDefaultBrands(){
         brandList.add(new Brand("Samsung"));
         brandList.add(new Brand("Lenovo"));
@@ -41,27 +43,6 @@ public class Brand {
         return brandList;
     }
 
-    public void addBrand(){
-        PatikaStore.sc.nextLine();
-        System.out.print("New Brand : ");
-        String newName = PatikaStore.sc.nextLine();
-        if(!doesContains(newName)){
-            brandList.add(new Brand(newName));
-            System.out.println(newName + " Named Brand Added!");
-            compareList();
-        }
-        else{
-            System.out.println("Brand Already Exists");
-        }
-
-    }
-    public void removeBrand(){
-        System.out.println("deleted!");
-        compareList();
-    }
-    public void editBrand(){
-        System.out.println("edited!");
-    }
     public String getName() {
         return name;
     }
@@ -74,6 +55,71 @@ public class Brand {
         return id;
     }
 
+    //ADD BRAND
+    public void addBrand(){
+        PatikaStore.sc.nextLine();
+        System.out.print("New Brand : ");
+        String newName = PatikaStore.sc.nextLine();
+
+        if(!doesContains(newName)){
+            brandList.add(new Brand(newName));
+            System.out.println(newName + " Named Brand Added!");
+            compareList();
+        }
+        else{
+            System.out.println("Brand Already Exists");
+        }
+    }
+    //REMOVE BRAND VIA ID
+    public void removeBrand(){
+        try {
+            PatikaStore.sc.nextLine();
+            System.out.print("Brand ID : ");
+            int dID = PatikaStore.sc.nextInt();
+
+            if (doesContains(dID)) {
+                int index = findIndex(dID);
+                System.out.println(dID + " - " + brandList.get(index).getName() + " Named Brand Removed!");
+                brandList.remove(index);
+                compareList();
+            }
+            else {
+                System.out.println("Brand Doesn't Exists!");
+            }
+        }
+        catch (InputMismatchException e){
+            System.out.println(e.getMessage());
+            PatikaStore.sc.nextLine();
+        }
+    }
+    //EDIT BRAND VIA ID
+    public void editBrand(){
+        try {
+            System.out.print("Brand ID : ");
+            int eID = PatikaStore.sc.nextInt();
+            PatikaStore.sc.nextLine();
+
+            if (doesContains(eID)) {
+                int index = findIndex(eID);
+                System.out.print("New Name of " + brandList.get(index).getName() + " : ");
+                String newName = PatikaStore.sc.nextLine();
+
+                System.out.println(brandList.get(index).getId() + " - "
+                        + brandList.get(index).getName() + " Changed to " + newName);
+                brandList.get(index).setName(newName);
+                compareList();
+            }
+            else {
+                System.out.println("Brand Doesn't Exists!");
+            }
+        }
+        catch (InputMismatchException e){
+            System.out.println(e.getMessage());
+            PatikaStore.sc.nextLine();
+        }
+    }
+
+    //CHECK DOES THE LIST HAVE THE OBJECT FROM NAME
     private boolean doesContains(String input){
         for (Brand brand: brandList) {
             if(brand.getName().equals(input)){
@@ -82,7 +128,26 @@ public class Brand {
         }
         return  false;
     }
+    //CHECK DOES THE LIST HAVE THE OBJECT FROM ID
+    private boolean doesContains(int input){
+        for (Brand brand: brandList) {
+            if(brand.getId() == input){
+                return true;
+            }
+        }
+        return  false;
+    }
+    //FIND THE INDEX OF A BRAND FROM IT'S ID
+    private int findIndex(int input){
+        for (int i = 0; i < brandList.size() ; i++) {
+            if(brandList.get(i).getId() == input){
+                return i;
+            }
+        }
+        return  0;
+    }
 
+    //SORT BRAND LIST ASC
     public void compareList(){
         //Comparator<Brand> nameComparator = Comparator.comparing(Brand::getName);
         Comparator<Brand> nameComparator = (brand1, brand2) ->
