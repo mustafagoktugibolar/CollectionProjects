@@ -1,10 +1,10 @@
-package patikaStore;
+package patikaStore.Store;
 
 import java.util.ArrayList;
 
 public interface IStore {
     void displayBrands() throws InterruptedException;
-    <T> void displayProduct(ArrayList<T> products);
+    void displayProduct();
     void panel();
     void admin();
 

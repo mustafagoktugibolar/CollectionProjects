@@ -1,4 +1,6 @@
-package patikaStore;
+package patikaStore.Brands;
+
+import patikaStore.Store.PatikaStore;
 
 import java.util.ArrayList;
 import java.util.Comparator;
